@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =6
+let g:netrw_dirhist_6='/Users/BrianKo/GitHub/pytorch-lightning-bolts/pl_bolts/datamodules'
+let g:netrw_dirhist_5='/Users/BrianKo/GitHub/obsidian_todoist/src'
+let g:netrw_dirhist_4='/Users/BrianKo/GitHub/obsidian_todoist'
+let g:netrw_dirhist_3='/Users/BrianKo/.nvim'
+let g:netrw_dirhist_2='/Users/BrianKo/_Notes'
+let g:netrw_dirhist_1='/Users/BrianKo/Desktop/DVC/data-registry'
+let g:netrw_dirhist_0='/Users/BrianKo'
+let g:netrw_dirhist_9='/Users/BrianKo/GitHub/hydra/hydra'
+let g:netrw_dirhist_8='/Users/BrianKo/GitHub/MAML-Pytorch'
+let g:netrw_dirhist_7='/Users/BrianKo/.nvim'
