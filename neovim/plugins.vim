@@ -1,27 +1,34 @@
 "plugins.vimrc
 
-"---------------Begin Plug
+"--------------- Begin Plug
 call plug#begin('~/.local/share/nvim/plugged')
 
-"---------------UI & UX
+"--------------- UI & UX
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'Yggdroot/indentLine'
 Plug 'kaicataldo/material.vim'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'junegunn/fzf'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
-"---------------Editing
+"--------------- Editing
 Plug 'jiangmiao/auto-pairs'
 Plug 'machakann/vim-sandwich'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-"---------------Python
+"--------------- Python
 Plug 'psf/black', { 'tag': '19.10b0' }
 
-"---------------Workflow
+"-------------- JS/JSX/TS
+Plug 'yuezk/vim-js'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'HerringtonDarkholme/yats.vim'
 
-"---------------End Plug
+"--------------- Workflow
+Plug 'voldikss/vim-floaterm'
+
+"--------------- End Plug
 call plug#end()
 
 " Reset conceal level for json
@@ -53,7 +60,7 @@ set updatetime=300
 " don't give |ins-completion-menu| messages.
 set shortmess+=c
 
-" always show signcolumns
+" Show signcolumns
 set signcolumn=yes
 
 " Use tab for trigger completion with characters ahead and navigate.
