@@ -1,0 +1,61 @@
+name: loop
+root: ~/loop
+
+# Optional tmux socket
+# socket_name: foo
+
+# Note that the pre and post options have been deprecated and will be replaced by
+# project hooks.
+
+# Project hooks
+
+# Runs on project start, always
+# on_project_start: command
+
+# Run on project start, the first time
+# on_project_first_start: command
+
+# Run on project start, after the first time
+# on_project_restart: command
+
+# Run on project exit ( detaching from tmux session )
+# on_project_exit: command
+
+# Run on project stop
+# on_project_stop: command
+
+# Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
+# pre_window: rbenv shell 2.0.0-p247
+
+# Pass command line options to tmux. Useful for specifying a different tmux.conf.
+# tmux_options: -f ~/.tmux.mac.conf
+
+# Change the command to call tmux.  This can be used by derivatives/wrappers like byobu.
+# tmux_command: byobu
+
+# Specifies (by name or index) which window will be selected on project startup. If not set, the first window is used.
+startup_window: '2'
+
+# Specifies (by index) which pane of the specified window will be selected on project startup. If not set, the first pane is used.
+# startup_pane: 1
+
+# Controls whether the tmux session should be attached to automatically. Defaults to true.
+# attach: false
+
+windows:
+  - dev:
+      root: ~/loop/
+      # https://stackoverflow.com/a/9976282
+      layout: 9739,150x42,0,0{88x42,0,0,0,61x42,89,0[61x12,89,0,2,61x29,89,13,4]}
+      panes:
+        - cd backend && yarn docker:up && yarn dev
+        - cd frontend && yarn relay
+        - cd frontend && yarn dev
+  - backend:
+      root: ~/loop/backend
+      panes:
+        - vim
+  - frontend:
+      root: ~/loop/frontend
+      panes:
+        - vim
