@@ -46,9 +46,10 @@ windows:
   - dev:
       root: ~/loop/
       # https://stackoverflow.com/a/9976282
-      layout: 9739,150x42,0,0{88x42,0,0,0,61x42,89,0[61x12,89,0,2,61x29,89,13,4]}
+      layout: 94a1,187x48,0,0{107x48,0,0[107x37,0,0,0,107x10,0,38,5],79x48,108,0[79x15,108,0,3,79x32,108,16,4]}
       panes:
         - cd backend && yarn docker:up && yarn dev
+        - docker stats --format "table {{.Container}}\t{{.Name}}\t{{.CPUPerc}}\t{{.MemUsage}}\t{{.MemPerc}}"
         - cd frontend && yarn relay
         - cd frontend && yarn dev
   - backend:
