@@ -1,22 +1,25 @@
--- disable netrw
+-- Disable Netrw
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
--- set termguicolors to enable highlight groups
-vim.opt.termguicolors = true
-vim.g.material_theme_style = "ocean"
-vim.cmd [[ colorscheme material ]]
-
 vim.g.mapleader = " "
+
+-- Set termguicolors to enable highlight groups
+vim.opt.termguicolors = true
+
+-- https://github.com/lukas-reineke/indent-blankline.nvim
+vim.opt.list = true
 
 vim.opt.number = true
 
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
--- https://github.com/lukas-reineke/indent-blankline.nvim
-vim.opt.list = true
--- vim.opt.listchars:append "space:⋅"
+vim.opt.expandtab = true
+vim.opt.shiftwidth = 2
+vim.opt.tabstop = 2
+
+vim.opt.wrap = false
 
 vim.keymap.set('n', '<C-h>', '<C-w>h', { noremap = true, silent = true })
 vim.keymap.set('n', '<C-l>', '<C-w>l', { noremap = true, silent = true })

@@ -3,35 +3,28 @@ return {
   dependencies = {
     'nvim-lua/plenary.nvim',
     'nvim-treesitter/nvim-treesitter',
+    'folke/which-key.nvim',
   },
   config = function()
+    local actions = require('telescope.actions')
     require('telescope').setup({
-      pickers = {
-	find_files = {
-	  theme = "dropdown",
-	},
-	git_branches = {
-	  theme = "dropdown",
-	},
-	git_stash = {
-	  theme = "dropdown",
-	},
-	git_status = {
-	  theme = "dropdown",
-	},
-	live_grep = {
-	  theme = "dropdown",
-	},
-	lsp_definitions = {
-	  theme = "dropdown",
-	},
-	lsp_references = {
-	  theme = "dropdown",
-	},
-	lsp_document_symbols = {
-	  theme = "dropdown",
-	},
-      }
+      defaults = {
+        mappings = {
+          i = {
+            ['<esc>'] = actions.close,
+            ['<C-j>'] = actions.move_selection_next,
+            ['<C-k>'] = actions.move_selection_previous,
+            ['<C-n>'] = false,
+            ['<C-p>'] = false,
+          },
+        },
+        layout_config = {
+          horizontal = {
+            width = 0.9,
+            height = 0.9,
+          },
+        },
+      },
     })
     require('which-key').register({
       ['<leader>'] = {
@@ -47,5 +40,5 @@ return {
         t = { '<cmd>lua require("telescope.builtin").live_grep()<cr>', 'Search text' },
       },
     })
-  end
+  end,
 }

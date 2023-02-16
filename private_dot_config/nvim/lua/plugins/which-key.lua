@@ -10,7 +10,7 @@ return {
         s = { '<cmd>lua require("telescope.builtin").lsp_document_symbols()<cr>', 'Go to symbols' },
       },
       ['<leader>'] = {
-        c = { '<cmd>BufferKill<cr>', 'Close current buffer' },
+        c = { '<cmd>bd<cr>', 'Close current buffer' },
         h = { '<cmd>noh<cr>', 'No highlight' },
         [';'] = { '<cmd>dashboard<cr>', 'Open dashboard' },
       },
@@ -25,6 +25,8 @@ return {
         O = { '<cmd>Telescope git_status<cr>', 'Open changed files' },
       },
       ['<leader>l'] = {
+        j = { vim.diagnostic.goto_next, 'Go to next diagnostics' },
+        k = { vim.diagnostic.goto_prev, 'Go to prev diagnostics' },
         r = { vim.lsp.buf.rename, 'Rename variable' },
       },
     })
