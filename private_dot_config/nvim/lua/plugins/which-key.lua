@@ -4,23 +4,23 @@ return {
     vim.o.timeout = true
     vim.o.timeoutlen = 300
     require('which-key').register({
-      g = {
-        d = { '<cmd>lua require("telescope.builtin").lsp_definitions()<CR>', 'Go to definition' },
-        r = { '<cmd>lua require("telescope.builtin").lsp_references()<cr>', 'Go to references' },
-        s = { '<cmd>lua require("telescope.builtin").lsp_document_symbols()<cr>', 'Go to symbols' },
-      },
       ['<leader>'] = {
-        c = { '<cmd>bd<cr>', 'Close current buffer' },
+        d = { '<cmd>bd<cr>', 'Close current buffer' },
         h = { '<cmd>noh<cr>', 'No highlight' },
-        [';'] = { '<cmd>dashboard<cr>', 'Open dashboard' },
+        -- https://vimtricks.com/p/get-the-current-file-path/
+        y = { '<cmd>let @*=fnamemodify(expand("%"), ":~:.")<cr>', 'Copy current buffer\'s file path' },
       },
       ['<leader>b'] = {
-	name = 'Buffers',
+        name = 'Buffers',
         h = { '<cmd>BufferLineCloseLeft<CR>', 'Close all buffers to the left' },
         l = { '<cmd>BufferLineCloseRight<cr>', 'Close all buffers to the right' },
       },
+      ['<leader>c'] = {
+        name = 'Code',
+        i = { '<cmd>TypescriptAddMissingImports<CR>', 'Add missing imports' },
+      },
       ['<leader>g'] = {
-	name = 'Git',
+        name = 'Git',
         o = { '<cmd>lua require("git.browse").open()<CR>', 'Open file in git repository' },
         O = { '<cmd>Telescope git_status<cr>', 'Open changed files' },
       },

@@ -1,20 +1,19 @@
 return {
   {
-    'windwp/nvim-autopairs',
-    dependencies = {
-      { 'nvim-treesitter/nvim-treesitter' },
-    },
-    config = function()
-      require('nvim-autopairs').setup()
-    end
+    'dinhhuy258/git.nvim'
   },
   {
-    'akinsho/toggleterm.nvim',
+    'folke/trouble.nvim',
+    dependencies = {
+      'nvim-tree/nvim-web-devicons',
+    },
+  },
+  {
+    'lewis6991/gitsigns.nvim',
+    event = 'BufRead',
     config = function()
-      require('toggleterm').setup({
-        size = vim.o.columns * 0.5,
-	      direction = 'vertical',
-	      open_mapping = [[<c-\>]],
+      require('gitsigns').setup({
+        current_line_blame = true,
       })
     end
   },
@@ -22,36 +21,25 @@ return {
     'zbirenbaum/copilot.lua',
     cmd = 'Copilot',
     event = 'VimEnter',
-    dependencies = {
-      'github/copilot.vim'
-    },
     config = function()
       vim.defer_fn(function()
-	      require('copilot').setup({
-	        panel = {
-	          enabled = false,
-	          auto_refresh = false,
-	        },
-	        suggestion = {
-	          enabled = true,
-	          auto_trigger = true,
-	          debounce = 75,
-	          keymap = {
-	            accept = '<C-space>',
-	            accept_word = false,
-	            accept_line = false,
-	          },
-	        }
-	      })
+	require('copilot').setup({
+	  panel = {
+	    enabled = false,
+	    auto_refresh = false,
+	  },
+	  suggestion = {
+	  enabled = true,
+	  auto_trigger = true,
+          debounce = 75,
+	  keymap = {
+	    accept = '<C-space>',
+	      accept_word = false,
+	      accept_line = false,
+	    },
+	  }
+	})
       end, 100)
     end
-  },
-  {
-    'aserowy/tmux.nvim',
-    config = function() require('tmux').setup()
-    end
-  },
-  {
-    'dinhhuy258/git.nvim',
-  },
+  }
 }

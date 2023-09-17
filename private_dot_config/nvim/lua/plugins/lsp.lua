@@ -1,50 +1,48 @@
 return {
-  'VonHeikemen/lsp-zero.nvim',
-  branch = 'v1.x',
-  dependencies = {
-    -- LSP Support
-    {'neovim/nvim-lspconfig'},             -- Required
-    {'williamboman/mason.nvim'},           -- Optional
-    {'williamboman/mason-lspconfig.nvim'}, -- Optional
-
-    -- Autocompletion
-    {'hrsh7th/nvim-cmp'},         -- Required
-    {'hrsh7th/cmp-nvim-lsp'},     -- Required
-    {'hrsh7th/cmp-buffer'},       -- Optional
-    {'hrsh7th/cmp-path'},         -- Optional
-    -- {'saadparwaiz1/cmp_luasnip'}, -- Optional
-    {'hrsh7th/cmp-nvim-lua'},     -- Optional
-
-    -- Snippets
-    {'L3MON4D3/LuaSnip'},             -- Required
-    -- {'rafamadriz/friendly-snippets'}, -- Optional
-  },
-  config = function()
-    local lsp = require('lsp-zero')
-    lsp.preset('recommended')
-
-    lsp.configure('sumneko_lua', {
-      settings = {
-        Lua = {
-          diagnostics = {
-            globals = { 'vim' }
-          },
-          telemetry = {
-            enable = false,
-          },
+  {
+    'VonHeikemen/lsp-zero.nvim',
+    branch = 'v2.x',
+    dependencies = {
+      -- LSP - core
+      { 'neovim/nvim-lspconfig' },
+      { 'williamboman/mason.nvim' },
+      { 'williamboman/mason-lspconfig.nvim' },
+      -- LSP - helpers
+      { 'jose-elias-alvarez/typescript.nvim' },
+      -- autocompletion
+      { 'hrsh7th/nvim-cmp' },
+      { 'hrsh7th/cmp-nvim-lsp' },
+    },
+    config = function()
+      local lsp = require('lsp-zero').preset({})
+      local lspconfig = require('lspconfig')
+      -- Setup cmp configurations
+      local cmp = require('cmp')
+      cmp.setup({
+        mapping = {
+          ['<CR>'] = cmp.mapping.confirm({ select = true }),
         }
-      },
-    })
-
-    lsp.configure('tsserver', {
-      init_options = {
-        preferences = {
-          quotePreference = 'single',
-          importModuleSpecifierPreference = 'non-relative',
+      })
+      lsp.on_attach(function(client, bufnr)
+        lsp.default_keymaps({buffer = bufnr})
+      end)
+      -- Setup LSP server configurations
+      lsp.skip_server_setup({'tsserver'})
+      lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
+      lsp.setup()
+      require('typescript').setup({
+        server = {
+          init_options = {
+            preferences = {
+              autoImportFileExcludePatterns = {
+                '@aws-sdk/client-textract'
+              },
+              quotePreference = 'single',
+              importModuleSpecifierPreference = 'non-relative',
+            },
+          },
         },
-      },
-    })
-
-    lsp.setup()
-  end,
+      })
+    end,
+  },
 }
