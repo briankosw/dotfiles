@@ -49,8 +49,8 @@ windows:
       layout: d393,272x67,0,0{150x67,0,0[150x23,0,0,0,150x23,0,24,13,150x19,0,48,3],121x67,151,0[121x25,151,0,4,121x41,151,26,5]}
       panes:
         - cd backend && yarn docker:up && yarn dev:no-async
+        - cd backend && yarn tsc --watch
         - docker stats --format "table {{.Container}}\t{{.Name}}\t{{.CPUPerc}}\t{{.MemUsage}}\t{{.MemPerc}}"
-        - yarn tsc --watch
         - cd frontend && yarn relay
         - cd frontend && yarn dev
   - backend:
