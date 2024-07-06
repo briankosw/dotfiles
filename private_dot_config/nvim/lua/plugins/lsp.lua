@@ -1,26 +1,48 @@
 return {
-	"VonHeikemen/lsp-zero.nvim",
-	branch = "v3.x",
-	dependencies = {
-		{ "neovim/nvim-lspconfig" },
-		{ "hrsh7th/nvim-cmp" },
-		{ "hrsh7th/cmp-nvim-lsp" },
-		{ "L3MON4D3/LuaSnip" },
-	},
-	config = function()
-		local lsp_zero = require("lsp-zero")
-		local cmp = require("cmp")
+  {
+    'j-hui/fidget.nvim',
+    config = true,
+  },
+  {
+    'neovim/nvim-lspconfig',
+    dependencies = {
+      'hrsh7th/nvim-cmp',
+      'hrsh7th/cmp-nvim-lsp',
+      'L3MON4D3/LuaSnip',
+    },
+    config = function()
+      local lspconfig = require('lspconfig')
+      local cmp = require('cmp')
 
-		lsp_zero.on_attach(function(client, bufnr)
-			lsp_zero.default_keymaps({ bufnr = bufnr })
-		end)
+      lspconfig.clangd.setup({})
 
-		cmp.setup({
-			mapping = {
-				["<CR>"] = cmp.mapping.confirm({ select = true }),
-			},
-		})
-
-		require("lspconfig").tsserver.setup({})
-	end,
+      cmp.setup({
+        sources = {
+          { name = 'nvim_lsp' },
+        },
+        mapping = {
+          -- Enter key confirms completion item
+          ['<CR>'] = cmp.mapping.confirm({ select = false }),
+        },
+        snippet = {
+          expand = function(args)
+            require('luasnip').lsp_expand(args.body)
+          end,
+        },
+      })
+    end,
+  },
+  -- TODO: configure
+  {
+    'pmizio/typescript-tools.nvim',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'neovim/nvim-lspconfig',
+    },
+    config = true,
+    init = function()
+      vim.keymap.set('n', '<leader>ci', '<cmd>TSToolsAddMissingImports<cr>', { desc = 'Add missing imports' })
+      vim.keymap.set('n', '<leader>cu', '<cmd>TSToolsRemoveUnusedImports<cr>', { desc = 'Remove unused imports' })
+    end,
+  },
 }

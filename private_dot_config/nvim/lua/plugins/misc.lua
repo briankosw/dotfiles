@@ -1,42 +1,64 @@
 return {
-	{
-		"aserowy/tmux.nvim",
-		config = function()
-			require("tmux").setup()
-		end,
-	},
-	{
-		"folke/which-key.nvim",
-		config = function()
-			vim.o.timeout = true
-			vim.o.timeoutlen = 300
-			require("which-key").register({
-				["<leader>"] = {
-					d = { "<cmd>bd<cr>", "Close current buffer" },
-					h = { "<cmd>noh<cr>", "No highlight" },
-					-- https://vimtricks.com/p/get-the-current-file-path/
-					y = { "<cmd>let @*=fnamemodify(expand('%'), ':~:.')<cr>", 'Copy current buffer"s file path' },
-				},
-				["<leader>b"] = {
-					name = "Buffers",
-					h = { "<cmd>BufferLineCloseLeft<CR>", "Close all buffers to the left" },
-					l = { "<cmd>BufferLineCloseRight<cr>", "Close all buffers to the right" },
-				},
-				["<leader>c"] = {
-					name = "Code",
-					i = { "<cmd>TypescriptAddMissingImports<CR>", "Add missing imports" },
-				},
-				["<leader>g"] = {
-					name = "Git",
-					o = { "<cmd>lua require('git.browse').open()<CR>", "Open file in git repository" },
-					O = { "<cmd>Telescope git_status<cr>", "Open changed files" },
-				},
-				["<leader>l"] = {
-					j = { vim.diagnostic.goto_next, "Go to next diagnostics" },
-					k = { vim.diagnostic.goto_prev, "Go to prev diagnostics" },
-					r = { vim.lsp.buf.rename, "Rename variable" },
-				},
-			})
-		end,
-	},
+  {
+    'aserowy/tmux.nvim',
+    config = true,
+  },
+  -- TODO: configure
+  {
+    'catppuccin/nvim',
+    name = 'catppuccin',
+    priority = 1000,
+    config = function()
+      local utils = require('catppuccin.utils.colors')
+      require('catppuccin').setup({
+        flavour = 'mocha',
+        highlight_overrides = {
+          all = function(colors)
+            return {
+              -- Match the cursor line number background to cursor line (CursorLine) background.
+              CursorLineNr = {
+                bg = utils.vary_color(
+                  { latte = utils.lighten(colors.mantle, 0.70, colors.base) },
+                  utils.darken(colors.surface0, 0.64, colors.base)
+                ),
+              },
+            }
+          end,
+        },
+        integrations = {
+          which_key = true,
+        },
+      })
+      -- This must be called after setup.
+      vim.cmd.colorscheme('catppuccin')
+    end,
+  },
+  -- TODO: configure
+  {
+    'folke/which-key.nvim',
+    config = true,
+  },
+  -- TODO: configure
+  {
+    'goolord/alpha-nvim',
+    event = 'VimEnter',
+    dependencies = {
+      'nvim-tree/nvim-web-devicons',
+    },
+    config = function()
+      local alpha = require('alpha')
+      local dashboard = require('alpha.themes.dashboard')
+      dashboard.section.header.val = {
+        '                                                     ',
+        '  ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗ ',
+        '  ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║ ',
+        '  ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║ ',
+        '  ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║ ',
+        '  ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║ ',
+        '  ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ ',
+        '                                                     ',
+      }
+      alpha.setup(dashboard.opts)
+    end,
+  },
 }
