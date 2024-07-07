@@ -15,6 +15,7 @@ return {
       local cmp = require('cmp')
 
       lspconfig.clangd.setup({})
+      lspconfig.zls.setup({})
 
       cmp.setup({
         sources = {
