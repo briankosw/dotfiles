@@ -30,5 +30,5 @@ vim.keymap.set(
 )
 vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', { desc = 'Show hover information' })
 
-vim.keymap.set('n', '<leader>lj', '<cmd>lua vim.lsp.diagnostic.goto_next()<cr>', { desc = 'Go to next diagnostic' })
-vim.keymap.set('n', '<leader>lk', '<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>', { desc = 'Go to previous diagnostic' })
+vim.keymap.set('n', '<leader>lj', '<cmd>lua vim.diagnostic.goto_next()<cr>', { desc = 'Go to next diagnostic' })
+vim.keymap.set('n', '<leader>lk', '<cmd>lua vim.diagnostic.goto_prev()<cr>', { desc = 'Go to previous diagnostic' })
