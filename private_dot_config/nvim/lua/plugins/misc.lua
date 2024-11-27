@@ -61,4 +61,8 @@ return {
       alpha.setup(dashboard.opts)
     end,
   },
+  {
+    'LudoPinelli/comment-box.nvim',
+    config = true,
+  },
 }

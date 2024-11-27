@@ -1,7 +1,6 @@
 return {
   {
     'dmmulroy/tsc.nvim',
-    enabled = false,
     ft = { 'typescript', 'typescriptreact' },
     config = true,
     init = function()

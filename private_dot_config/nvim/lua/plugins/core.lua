@@ -191,6 +191,7 @@ return {
   -- TODO: configure
   {
     'stevearc/conform.nvim',
+    enabled = false,
     event = 'BufEnter',
     config = function()
       require('conform').setup({
@@ -210,28 +211,13 @@ return {
   },
   -- TODO: configure
   {
-    'zbirenbaum/copilot.lua',
-    cmd = 'Copilot',
-    event = 'VimEnter',
+    'supermaven-inc/supermaven-nvim',
     config = function()
-      vim.defer_fn(function()
-        require('copilot').setup({
-          panel = {
-            enabled = false,
-            auto_refresh = false,
-          },
-          suggestion = {
-            enabled = true,
-            auto_trigger = true,
-            debounce = 75,
-            keymap = {
-              accept = '<C-space>',
-              accept_word = false,
-              accept_line = false,
-            },
-          },
-        })
-      end, 100)
+      require('supermaven-nvim').setup({
+        keymaps = {
+          accept_suggestion = '<C-Space>',
+        },
+      })
     end,
   },
 }
