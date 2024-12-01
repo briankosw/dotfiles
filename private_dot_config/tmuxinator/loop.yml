@@ -10,7 +10,7 @@ root: ~/loop
 # Project hooks
 
 # Runs on project start, always
-# on_project_start: command
+on_project_start: orb
 
 # Run on project start, the first time
 # on_project_first_start: command
@@ -57,7 +57,11 @@ windows:
       root: ~/loop/backend
       panes:
         - vim
-  - frontend:
+  - backend:
+      root: ~/loop/backend
+  - backend:
       root: ~/loop/frontend
       panes:
         - vim
+  - backend:
+      root: ~/loop/frontend
