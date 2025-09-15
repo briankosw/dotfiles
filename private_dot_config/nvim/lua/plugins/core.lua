@@ -25,32 +25,89 @@ return {
   },
   {
     'akinsho/git-conflict.nvim',
-    version = '*',
+    enabled = false,
+  },
+  {
+    'aserowy/tmux.nvim',
     config = true,
   },
-  -- TODO: configure
+  {
+    'catppuccin/nvim',
+    name = 'catppuccin',
+    priority = 1000,
+    config = function()
+      local utils = require('catppuccin.utils.colors')
+      require('catppuccin').setup({
+        flavour = 'mocha',
+        highlight_overrides = {
+          all = function(colors)
+            return {
+              -- Match the cursor line number background to cursor line (CursorLine) background.
+              CursorLineNr = {
+                bg = utils.vary_color(
+                  { latte = utils.lighten(colors.mantle, 0.70, colors.base) },
+                  utils.darken(colors.surface0, 0.64, colors.base)
+                ),
+              },
+            }
+          end,
+        },
+        integrations = {
+          which_key = true,
+        },
+      })
+      -- This must be called after setup.
+      vim.cmd.colorscheme('catppuccin')
+    end,
+  },
   {
     'dinhhuy258/git.nvim',
     config = true,
-    init = function()
-      -- TODO: Update this to open file in main
-      vim.keymap.set('n', '<leader>go', '<cmd>lua require("git.browse").open()<cr>', { desc = 'Open file in GitHub' })
-    end,
   },
-  -- TODO: configure
   {
-    'echasnovski/mini.nvim',
-    version = '*',
-    config = function()
-      require('mini.pairs').setup()
-    end,
+    'folke/snacks.nvim',
+    opts = {
+      dashboard = {
+        sections = {
+          { section = 'header' },
+          { section = 'keys', gap = 1, padding = 1 },
+          { section = 'startup' },
+        },
+      },
+    },
   },
-  -- TODO: configure
   {
     'folke/todo-comments.nvim',
     dependencies = {
       'nvim-lua/plenary.nvim',
     },
+    config = true,
+  },
+  {
+    'folke/which-key.nvim',
+    dependencies = {
+      'nvim-tree/nvim-web-devicons',
+      'nvim-mini/mini.icons',
+    },
+    keys = {
+      { '<leader>bh', '<cmd>BufferLineCloseLeft<CR>' },
+      { '<leader>bl', '<cmd>BufferLineCloseRight<CR>' },
+      { '<leader>ci', '<cmd>TypescriptAddMissingImports<CR>' },
+      { '<leader>d', '<cmd>bd<cr>' },
+      { '<leader>e', '<cmd>NvimTreeToggle<cr>' },
+      { '<leader>gO', '<cmd>Telescope git_status<cr>' },
+      { '<leader>go', '<cmd>lua require("git.browse").open()<CR>' },
+      { '<leader>h', '<cmd>noh<cr>' },
+      { '<leader>lj', vim.diagnostic.goto_next, 'Go to next diagnostics' },
+      { '<leader>lk', vim.diagnostic.goto_prev, 'Go to previous diagnostics' },
+      { '<leader>lr', vim.lsp.buf.rename, 'Rename variable' },
+      -- https://vimtricks.com/p/get-the-current-file-path/
+      { '<leader>y', '<cmd>let @*=fnamemodify(expand("%"), ":~:.")<cr>' },
+    },
+  },
+  -- TODO: configure
+  {
+    'nvim-lualine/lualine.nvim',
     config = true,
   },
   -- TODO: configure
@@ -63,18 +120,6 @@ return {
     'lukas-reineke/indent-blankline.nvim',
     main = 'ibl',
     config = true,
-  },
-  -- TODO: configure
-  {
-    'nvim-lualine/lualine.nvim',
-    dependencies = {
-      'nvim-tree/nvim-web-devicons',
-    },
-    config = true,
-    init = function()
-      vim.keymap.set('n', '<leader>e', '<cmd>NvimTreeToggle<cr>', { desc = 'Toggle file explorer' })
-      vim.keymap.set('n', '<leader>f', '<cmd>NvimTreeFocus<cr>', { desc = 'Focus file explorer' })
-    end,
   },
   -- TODO: configure
   {
@@ -191,7 +236,6 @@ return {
   -- TODO: configure
   {
     'stevearc/conform.nvim',
-    enabled = false,
     event = 'BufEnter',
     config = function()
       require('conform').setup({
@@ -205,17 +249,6 @@ return {
           javascript = { { 'prettierd', 'prettier' } },
           lua = { 'stylua' },
           typescript = { { 'prettierd', 'prettier' } },
-        },
-      })
-    end,
-  },
-  -- TODO: configure
-  {
-    'supermaven-inc/supermaven-nvim',
-    config = function()
-      require('supermaven-nvim').setup({
-        keymaps = {
-          accept_suggestion = '<C-Space>',
         },
       })
     end,

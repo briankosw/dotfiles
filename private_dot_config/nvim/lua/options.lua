@@ -25,8 +25,10 @@ vim.opt.cursorline = true
 -- Avoid wrapping lines longer than the width of the window.
 vim.opt.wrap = false
 
+
 -- Reduce time (in milliseconds) to wait for a mapped key sequence to complete.
 -- This has been reduced primarily so that the which-key popup shows sooner.
+vim.o.timeout = true
 vim.opt.timeoutlen = 200
 
 -- Insert spaces in place of tabs.
