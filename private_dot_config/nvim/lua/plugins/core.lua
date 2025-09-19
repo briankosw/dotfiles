@@ -29,7 +29,9 @@ return {
   },
   {
     'aserowy/tmux.nvim',
-    config = true,
+    config = function()
+      require('tmux').setup()
+    end
   },
   {
     'catppuccin/nvim',
@@ -105,6 +107,9 @@ return {
       { '<leader>y', '<cmd>let @*=fnamemodify(expand("%"), ":~:.")<cr>' },
     },
   },
+  {
+    'LudoPinelli/comment-box.nvim',
+  },
   -- TODO: configure
   {
     'nvim-lualine/lualine.nvim',
@@ -147,6 +152,25 @@ return {
       })
     end,
     init = function()
+      local function live_grep_selection()
+        local mode = vim.fn.mode()
+        local text = ""
+
+        if mode == 'v' or mode == 'V' then
+          -- Get visually selected text
+          local start_pos = vim.fn.getpos("'<")
+          local end_pos = vim.fn.getpos("'>")
+          local lines = vim.fn.getline(start_pos[2], end_pos[2])
+          text = table.concat(lines, "\n")
+        else
+          -- Get word under cursor
+          text = vim.fn.expand("<cword>")
+        end
+
+        require("telescope.builtin").live_grep({
+          default_text = text,
+        })
+      end
       vim.keymap.set(
         'n',
         '<leader><space>',
@@ -165,6 +189,7 @@ return {
         '<cmd>lua require("telescope.builtin").live_grep()<cr>',
         { desc = 'Search text' }
       )
+      vim.keymap.set({'n', 'v'}, '<leader>sv', live_grep_selection, { desc = 'Live grep word/selection' })
       vim.keymap.set(
         'n',
         '<leader>sr',
