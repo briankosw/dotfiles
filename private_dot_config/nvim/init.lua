@@ -24,3 +24,16 @@ require('lazy').setup({
   install = { colorscheme = { 'catppuccin' } },
   checker = { enabled = true },
 })
+
+local lsp_configs = {}
+
+-- https://neovim.io/doc/user/lsp.html#lsp-new-config
+for _, f in ipairs(vim.api.nvim_get_runtime_file('lsp/*.lua', true)) do
+  local server_name = vim.fn.fnamemodify(f, ':t:r')
+  -- Ignore any LSP configuration files prepended with an underscore.
+  if server_name:sub(1, 1) ~= '_' then
+    table.insert(lsp_configs, server_name)
+  end
+end
+
+vim.lsp.enable(lsp_configs)
