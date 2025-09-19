@@ -1,0 +1,24 @@
+[aws]
+disabled = true
+
+[character]
+success_symbol = '[➜](bold green)'
+error_symbol = '[➜](bold red) '
+
+[docker_context]
+disabled = true
+
+[git_branch]
+format = '[$branch]($style) '
+truncation_symbol = ''
+
+[git_status]
+disabled = true
+
+[nodejs]
+disabled = true
+
+[time]
+disabled = false
+format = '[$time]($style) '
+time_format = '%F %T'
