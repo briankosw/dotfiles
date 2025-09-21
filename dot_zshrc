@@ -1,0 +1,3 @@
+if [[ -f ~/.base.zsh ]]; then
+  source ~/.base.zsh
+fi
