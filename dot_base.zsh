@@ -1,3 +1,9 @@
+# https://lgug2z.com/articles/sensible-wordchars-for-most-developers/
+WORDCHARS='*?[]~=&;!#$%^(){}<>'
+
+alias ls='ls --color=auto -hv'
+alias grep='grep --color=auto'
+
 alias cz='chezmoi'
 
 if command -v nvim &> /dev/null; then
