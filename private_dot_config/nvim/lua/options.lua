@@ -29,7 +29,7 @@ vim.opt.wrap = false
 -- Reduce time (in milliseconds) to wait for a mapped key sequence to complete.
 -- This has been reduced primarily so that the which-key popup shows sooner.
 vim.o.timeout = true
-vim.opt.timeoutlen = 200
+vim.opt.timeoutlen = 500
 
 -- Insert spaces in place of tabs.
 vim.opt.expandtab = true

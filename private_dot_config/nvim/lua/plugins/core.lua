@@ -91,6 +91,7 @@ return {
       'nvim-tree/nvim-web-devicons',
       'nvim-mini/mini.icons',
     },
+    event = "VeryLazy",
     keys = {
       { '<leader>bh', '<cmd>BufferLineCloseLeft<CR>' },
       { '<leader>bl', '<cmd>BufferLineCloseRight<CR>' },
@@ -106,6 +107,9 @@ return {
       -- https://vimtricks.com/p/get-the-current-file-path/
       { '<leader>y', '<cmd>let @*=fnamemodify(expand("%"), ":~:.")<cr>' },
     },
+    config = function()
+      require('which-key').setup()
+    end,
   },
   {
     'LudoPinelli/comment-box.nvim',
